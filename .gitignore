@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code
+.claude/
+*.swp
+*.swo
+*~
+
+# OpenSpec
+openspec/
+
+# Project context (development only)
+CONTEXT.md
+
+# References (development only)
+references/
+
+# Test output
+tests/

@@ -1,0 +1,36 @@
+{
+  "name": "page-reel-skill",
+  "version": "1.0.0",
+  "description": "Claude Code Skill for generating page showcase videos from frontend projects",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bennywen/page-reel-skill"
+  },
+  "homepage": "https://github.com/bennywen/page-reel-skill",
+  "bugs": {
+    "url": "https://github.com/bennywen/page-reel-skill/issues"
+  },
+  "files": [
+    "skill.md",
+    "package.json"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "claude-code",
+    "skill",
+    "video",
+    "screenshot",
+    "puppeteer",
+    "hyperframes",
+    "demo",
+    "showcase"
+  ],
+  "author": "bennywen",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^25.2.0"
+  }
+}
