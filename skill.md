@@ -389,7 +389,7 @@ curl -o media/assets/fonts/NotoSansSC-Bold.woff2 "$BOLD_URL"
       @font-face { font-family: 'Noto Sans SC'; font-weight: 700; font-style: normal; src: url('assets/fonts/NotoSansSC-Bold.woff2') format('woff2'); }
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #f5f5f7; }
-      body { font-family: "Noto Sans SC", "Inter", -apple-system, sans-serif; }
+      body { font-family: "Noto Sans SC", "Inter", sans-serif; }
 
       /* === 设备框架 === */
       .device-frame {
