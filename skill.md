@@ -385,116 +385,164 @@ curl -o media/assets/fonts/NotoSansSC-Bold.woff2 "$BOLD_URL"
     <meta name="viewport" content="width=1920, height=1080" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <style>
-      /* 字体文件需要预先下载到 assets/fonts/ 目录 */
-      @font-face {
-        font-family: 'Noto Sans SC';
-        font-weight: 400;
-        font-style: normal;
-        src: url('assets/fonts/NotoSansSC-Regular.woff2') format('woff2');
-      }
-      @font-face {
-        font-family: 'Noto Sans SC';
-        font-weight: 700;
-        font-style: normal;
-        src: url('assets/fonts/NotoSansSC-Bold.woff2') format('woff2');
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html, body {
-        margin: 0;
-        width: 1920px;
-        height: 1080px;
+      @font-face { font-family: 'Noto Sans SC'; font-weight: 400; font-style: normal; src: url('assets/fonts/NotoSansSC-Regular.woff2') format('woff2'); }
+      @font-face { font-family: 'Noto Sans SC'; font-weight: 700; font-style: normal; src: url('assets/fonts/NotoSansSC-Bold.woff2') format('woff2'); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #f5f5f7; }
+      body { font-family: "Noto Sans SC", "Inter", -apple-system, sans-serif; }
+
+      /* === 设备框架 === */
+      .device-frame {
+        width: 1200px;
+        background: #ffffff;
+        border: 2px solid #d2d2d7;
+        border-radius: 12px;
         overflow: hidden;
-        background: #0a0a0a;
+        box-shadow: 0 8px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
       }
-      body {
-        font-family: "Noto Sans SC", "Inter", sans-serif;
+      .device-frame .device-topbar {
+        height: 28px;
+        background: #2d2d2d;
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+      }
+      .device-frame .device-topbar::before {
+        content: '';
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: #4a4a4a;
+        margin-left: calc(50% - 4px);
+      }
+      .device-frame .device-screen {
+        width: 1200px;
+        height: 750px;
+        overflow: hidden;
+      }
+      .device-frame .device-screen img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top left;
+      }
+      .device-frame .device-bottombar {
+        height: 6px;
+        background: #e8e8ed;
+        border-top: 1px solid #d2d2d7;
       }
 
+      /* === 标题页 === */
       .title-card {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        position: absolute; inset: 0;
+        display: flex; align-items: center; justify-content: center;
+        background: #f5f5f7;
       }
+      .title-card .title-content {
+        display: flex; align-items: center; gap: 80px;
+        padding: 0 120px; width: 100%;
+      }
+      .title-card .title-left { flex: 1; }
       .title-card h1 {
-        font-size: 72px;
-        color: #e8d5b7;
-        letter-spacing: 12px;
-        text-shadow: 0 4px 20px rgba(232, 213, 183, 0.3);
+        font-size: 56px; font-weight: 700; color: #1d1d1f;
+        letter-spacing: 2px; line-height: 1.2;
+      }
+      .title-card .title-underline {
+        width: 60px; height: 4px; background: #0071e3;
+        border-radius: 2px; margin: 16px 0 20px;
       }
       .title-card .subtitle {
-        font-size: 32px;
-        color: #a0a0a0;
-        margin-top: 24px;
-        letter-spacing: 4px;
+        font-size: 24px; color: #6e6e73; line-height: 1.6;
+      }
+      .title-card .tech-tags {
+        display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap;
+      }
+      .title-card .tech-tags span {
+        padding: 6px 16px; background: #e8e8ed; color: #1d1d1f;
+        border-radius: 20px; font-size: 14px; font-weight: 500;
+      }
+      .title-card .title-right {
+        flex-shrink: 0;
+      }
+      .title-card .title-preview {
+        width: 600px;
       }
 
+      /* === 页面 slide === */
       .page-slide {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #0a0a0a;
+        position: absolute; inset: 0;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        background: #f5f5f7;
+        gap: 30px;
       }
-      .page-slide img {
-        width: 1440px;
-        height: auto;
-        max-height: 960px;
-        object-fit: contain;
-        border-radius: 12px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      .page-slide .page-info {
+        text-align: center;
+      }
+      .page-slide .page-info h3 {
+        font-size: 22px; font-weight: 600; color: #1d1d1f;
+        margin-bottom: 6px;
+      }
+      .page-slide .page-info p {
+        font-size: 15px; color: #6e6e73;
       }
 
+      /* === 结束页 === */
       .end-card {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        position: absolute; inset: 0;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        background: #f5f5f7; gap: 32px;
       }
       .end-card h2 {
-        font-size: 56px;
-        color: #e8d5b7;
-        letter-spacing: 8px;
+        font-size: 42px; font-weight: 700; color: #1d1d1f;
+        letter-spacing: 2px;
+      }
+      .end-card .thumb-grid {
+        display: flex; gap: 16px; flex-wrap: wrap;
+        justify-content: center; max-width: 1400px;
+      }
+      .end-card .thumb-grid .thumb {
+        width: 200px; height: 125px; border-radius: 8px;
+        overflow: hidden; border: 1px solid #d2d2d7;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      }
+      .end-card .thumb-grid .thumb img {
+        width: 100%; height: 100%; object-fit: cover;
+      }
+      .end-card .end-info {
+        text-align: center;
       }
       .end-card .tech-stack {
-        font-size: 24px;
-        color: #888;
-        margin-top: 20px;
-        letter-spacing: 2px;
+        font-size: 16px; color: #6e6e73; margin-bottom: 8px;
+      }
+      .end-card .github-link {
+        font-size: 15px; color: #0071e3;
       }
     </style>
   </head>
   <body>
-    <div
-      id="root"
-      data-composition-id="main"
-      data-start="0"
-      data-duration="{{TOTAL_DURATION}}"
-      data-width="1920"
-      data-height="1080"
-    >
-      <!-- Title -->
-      <div
-        id="title-card"
-        class="clip"
-        data-start="0"
-        data-duration="4"
-        data-track-index="1"
-      >
+    <div id="root" data-composition-id="main" data-start="0" data-duration="{{TOTAL_DURATION}}" data-width="1920" data-height="1080">
+
+      <!-- Title: 0-4s -->
+      <div id="title-card" class="clip" data-start="0" data-duration="4" data-track-index="1">
         <div class="title-card">
-          <h1>{{TITLE}}</h1>
-          <div class="subtitle">{{SUBTITLE}}</div>
+          <div class="title-content">
+            <div class="title-left">
+              <h1>{{TITLE}}</h1>
+              <div class="title-underline"></div>
+              <div class="subtitle">{{SUBTITLE}}</div>
+              <div class="tech-tags">{{TECH_TAGS}}</div>
+            </div>
+            <div class="title-right">
+              <div class="title-preview">
+                <div class="device-frame">
+                  <div class="device-topbar"></div>
+                  <div class="device-screen"><img src="assets/{{FIRST_PAGE}}.png" alt="preview" /></div>
+                  <div class="device-bottombar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -502,16 +550,14 @@ curl -o media/assets/fonts/NotoSansSC-Bold.woff2 "$BOLD_URL"
       {{PAGE_SLIDES}}
 
       <!-- End card -->
-      <div
-        id="end-card"
-        class="clip"
-        data-start="{{END_START}}"
-        data-duration="3"
-        data-track-index="1"
-      >
+      <div id="end-card" class="clip" data-start="{{END_START}}" data-duration="3" data-track-index="1">
         <div class="end-card">
           <h2>{{END_TITLE}}</h2>
-          <div class="tech-stack">{{TECH_STACK}}</div>
+          <div class="thumb-grid">{{THUMBNAIL_GRID}}</div>
+          <div class="end-info">
+            <div class="tech-stack">{{TECH_STACK}}</div>
+            <div class="github-link">{{GITHUB_URL}}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -521,26 +567,39 @@ curl -o media/assets/fonts/NotoSansSC-Bold.woff2 "$BOLD_URL"
       const tl = gsap.timeline({ paused: true });
 
       // Title animation
-      tl.from("#title-card h1", { opacity: 0, y: -40, duration: 1, ease: "power2.out" }, 0);
-      tl.from("#title-card .subtitle", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out" }, 0.4);
+      tl.from("#title-card h1", { opacity: 0, x: -30, duration: 0.8, ease: "power2.out" }, 0);
+      tl.from("#title-card .title-underline", { scaleX: 0, transformOrigin: "left", duration: 0.5, ease: "power2.out" }, 0.3);
+      tl.from("#title-card .subtitle", { opacity: 0, y: 15, duration: 0.6, ease: "power2.out" }, 0.5);
+      tl.from("#title-card .tech-tags", { opacity: 0, y: 15, duration: 0.5, ease: "power2.out" }, 0.7);
+      tl.from("#title-card .title-right", { opacity: 0, x: 40, duration: 0.8, ease: "power2.out" }, 0.2);
       tl.to("#title-card", { opacity: 0, duration: 0.5, ease: "power2.in" }, 3.5);
       tl.set("#title-card", { opacity: 0 }, 4.00);
 
-      // Page slides fade in/out
+      // 5 种入场动画循环使用
+      var entranceAnimations = [
+        { x: 80, y: 0, scale: 1 },     // 从右侧滑入
+        { x: 0, y: 50, scale: 1 },      // 从底部滑入
+        { x: 0, y: 0, scale: 0.85 },    // 缩放展开
+        { x: -80, y: 0, scale: 1 },     // 从左侧滑入
+        { x: 0, y: -50, scale: 1 },     // 从顶部滑入
+      ];
+
       var slides = [
         {{SLIDES_TIMELINE}}
       ];
 
-      slides.forEach(function (s) {
-        tl.from(s.id, { opacity: 0, scale: 0.95, duration: 0.6, ease: "power2.out" }, s.start);
+      slides.forEach(function (s, i) {
+        var anim = entranceAnimations[i % entranceAnimations.length];
+        tl.from(s.id, { opacity: 0, x: anim.x, y: anim.y, scale: anim.scale, duration: 0.7, ease: "power2.out" }, s.start);
         tl.to(s.id, { opacity: 0, duration: 0.5, ease: "power2.in" }, s.start + 4.5);
         tl.set(s.id, { opacity: 0 }, s.start + 5);
       });
 
       // End card
       tl.from("#end-card", { opacity: 0, duration: 0.8, ease: "power2.out" }, {{END_START}});
-      tl.from("#end-card h2", { opacity: 0, y: 30, duration: 0.6, ease: "power2.out" }, {{END_START}} + 0.2);
-      tl.from("#end-card .tech-stack", { opacity: 0, duration: 0.5, ease: "power2.out" }, {{END_START}} + 0.6);
+      tl.from("#end-card h2", { opacity: 0, y: -20, duration: 0.6, ease: "power2.out" }, {{END_START}} + 0.2);
+      tl.from("#end-card .thumb-grid", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, {{END_START}} + 0.4);
+      tl.from("#end-card .end-info", { opacity: 0, duration: 0.5, ease: "power2.out" }, {{END_START}} + 0.7);
 
       window.__timelines["main"] = tl;
     </script>
@@ -560,9 +619,16 @@ curl -o media/assets/fonts/NotoSansSC-Bold.woff2 "$BOLD_URL"
 
 **{{TITLE}}**：从 `video-config.yaml` 读取，或从 `package.json` name 推断，或使用项目目录名
 
-**{{SUBTITLE}}**：从 `video-config.yaml` 读取，默认 "页面功能展示"
+**{{SUBTITLE}}**：从 `video-config.yaml` 读取，或从 README.md 推断项目描述
 
-**{{PAGE_SLIDES}}**：为每个页面生成一个 clip，格式：
+**{{TECH_TAGS}}**：从 `package.json` 的 dependencies 生成标签，格式：
+```html
+<span>Vue 3</span><span>Vite</span><span>TypeScript</span>
+```
+
+**{{FIRST_PAGE}}**：第一个页面的名称（用于标题页右侧预览），即 pages 数组第一项的 name
+
+**{{PAGE_SLIDES}}**：为每个页面生成一个 clip，包含设备框架和页面信息：
 ```html
 <div
   id="slide-{{PAGE_NAME}}"
@@ -572,10 +638,22 @@ curl -o media/assets/fonts/NotoSansSC-Bold.woff2 "$BOLD_URL"
   data-track-index="1"
 >
   <div class="page-slide">
-    <img src="assets/{{PAGE_NAME}}.png" alt="{{PAGE_NAME}} page" />
+    <div class="device-frame">
+      <div class="device-topbar"></div>
+      <div class="device-screen"><img src="assets/{{PAGE_NAME}}.png" alt="{{PAGE_NAME}}" /></div>
+      <div class="device-bottombar"></div>
+    </div>
+    <div class="page-info">
+      <h3>{{PAGE_TITLE}}</h3>
+      <p>{{PAGE_DESC}}</p>
+    </div>
   </div>
 </div>
 ```
+
+**{{PAGE_TITLE}}**：页面标题，从路由 `meta.title` 或 AI 推断（如"资产台账"、"工作台"）
+
+**{{PAGE_DESC}}**：页面功能描述，AI 根据组件功能生成（如"管理所有固定资产的入库、领用、调拨全生命周期"）
 
 **{{SLIDE_START}}** 计算：4 + (页面索引 × 5)，第一个页面从 4 秒开始
 
@@ -589,6 +667,13 @@ curl -o media/assets/fonts/NotoSansSC-Bold.woff2 "$BOLD_URL"
 **{{END_TITLE}}**：同 {{TITLE}}
 
 **{{TECH_STACK}}**：从 `package.json` 的 dependencies 推断，如 "Vue 3 + Vite + TypeScript"
+
+**{{THUMBNAIL_GRID}}**：结束页的截图缩略图网格，为每个页面生成一个缩略图：
+```html
+<div class="thumb"><img src="assets/{{PAGE_NAME}}.png" alt="{{PAGE_NAME}}" /></div>
+```
+
+**{{GITHUB_URL}}**：项目 GitHub 仓库地址，从 `video-config.yaml` 读取或从 `git remote -v` 推断。如果不明确，留空不显示。
 
 **多模块过渡**：如果选中了多个模块，在模块之间可以插入一个短暂的模块标题过渡（可选，由 AI 根据页面数量决定是否需要）。
 
